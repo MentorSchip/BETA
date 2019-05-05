@@ -1,0 +1,253 @@
+fileFormatVersion: 2
+guid: a9fb24c47b3e1fc4690398048aed8b89
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Button.001
+    100002: Button10
+    100004: Button11
+    100006: Button12
+    100008: Button13
+    100010: Button14
+    100012: Button15
+    100014: Button16
+    100016: Button17
+    100018: Button18
+    100020: Button19
+    100022: Button2
+    100024: Button3
+    100026: Button4
+    100028: Button5
+    100030: Button6
+    100032: Button7
+    100034: Button8
+    100036: Circle.003
+    100038: Circle.004
+    100040: Console
+    100042: console.003
+    100044: console.005
+    100046: //RootNode
+    100048: Cube.003
+    100050: Cube.014
+    100052: Cube.016
+    100054: Cube.017
+    100056: Cube.018
+    100058: Cube.019
+    100060: Empty.001
+    100062: screens
+    100064: Window bars
+    400000: Button.001
+    400002: Button10
+    400004: Button11
+    400006: Button12
+    400008: Button13
+    400010: Button14
+    400012: Button15
+    400014: Button16
+    400016: Button17
+    400018: Button18
+    400020: Button19
+    400022: Button2
+    400024: Button3
+    400026: Button4
+    400028: Button5
+    400030: Button6
+    400032: Button7
+    400034: Button8
+    400036: Circle.003
+    400038: Circle.004
+    400040: Console
+    400042: console.003
+    400044: console.005
+    400046: //RootNode
+    400048: Cube.003
+    400050: Cube.014
+    400052: Cube.016
+    400054: Cube.017
+    400056: Cube.018
+    400058: Cube.019
+    400060: Empty.001
+    400062: screens
+    400064: Window bars
+    2100000: Material
+    2100002: No Name
+    2300000: Button.001
+    2300002: Button10
+    2300004: Button11
+    2300006: Button12
+    2300008: Button13
+    2300010: Button14
+    2300012: Button15
+    2300014: Button16
+    2300016: Button17
+    2300018: Button18
+    2300020: Button19
+    2300022: Button2
+    2300024: Button3
+    2300026: Button4
+    2300028: Button5
+    2300030: Button6
+    2300032: Button7
+    2300034: Button8
+    2300036: Circle.003
+    2300038: Circle.004
+    2300040: Console
+    2300042: console.003
+    2300044: console.005
+    2300046: Cube.003
+    2300048: Cube.014
+    2300050: Cube.016
+    2300052: Cube.017
+    2300054: Cube.018
+    2300056: Cube.019
+    2300058: screens
+    2300060: Window bars
+    3300000: Button.001
+    3300002: Button10
+    3300004: Button11
+    3300006: Button12
+    3300008: Button13
+    3300010: Button14
+    3300012: Button15
+    3300014: Button16
+    3300016: Button17
+    3300018: Button18
+    3300020: Button19
+    3300022: Button2
+    3300024: Button3
+    3300026: Button4
+    3300028: Button5
+    3300030: Button6
+    3300032: Button7
+    3300034: Button8
+    3300036: Circle.003
+    3300038: Circle.004
+    3300040: Console
+    3300042: console.003
+    3300044: console.005
+    3300046: Cube.003
+    3300048: Cube.014
+    3300050: Cube.016
+    3300052: Cube.017
+    3300054: Cube.018
+    3300056: Cube.019
+    3300058: screens
+    3300060: Window bars
+    4300000: Button8
+    4300002: Button18
+    4300004: Button7
+    4300006: Button19
+    4300008: Button6
+    4300010: Button2
+    4300012: Button16
+    4300014: Button5
+    4300016: Button13
+    4300018: Button4
+    4300020: Button12
+    4300022: Button3
+    4300024: Button11
+    4300026: Button.001
+    4300028: Button15
+    4300030: Button14
+    4300032: Button10
+    4300034: Console
+    4300036: Circle.004
+    4300038: Cube.019
+    4300040: Cube.018
+    4300042: Cube.017
+    4300044: Cube.016
+    4300046: Circle.003
+    4300048: Button17
+    4300050: Cube.014
+    4300052: Cube.003
+    4300054: screens
+    4300056: console.005
+    4300058: console.003
+    4300060: Window bars
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

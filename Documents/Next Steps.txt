@@ -1,0 +1,38 @@
+File Save Path: Files -> Pixel 3 -> Android -> data -> com.willpetillo.arudemy -> files -> saves -> filename.json
+
+Google Drive Link: https://drive.google.com/open?id=1WB0xEA0Hasgmf6VW2rAm0BTDK9w1_NYU
+
+Opening screen -> Tap to open bottle -> Scroll opens & bottle floats away -> Login (-> Role Select) 
+- Student: Island scene view, bottle nearby, arrow hovering over
+	* What is the background, Skybox or camera feed?
+	-> Tap (raycast) bottle -> Scroll animation -> Short display of image to find 
+	-> Scroll disappears (where does it go?), Image moves to Hint Panel.
+
+
+Next Milestone:
+- Extend Back functionality (Mentor & Student paths) to revert data to earlier state
+- Map View: enter from Game area
+- Animation on selecting bottle in Game Area
+	+ Screen fade on transition to/from Game Area
+	-> Replace background with overlay image, fade out transparency
+- Send email with data automatically
+* Remember to turn off Reporter object on future demo builds!
+
+Errors:	
+[check] Complete student path, create new student -> resumes first student progress (at end)
+	- Check if error also present when closing/reopening app
+- "Saving..." event does not work on mentor path (fine for student) -> feature currently disabled
+
+Minor Errors:
+- "Saving..." notification not always present, Console Errors re inactive
+- Scroll background shows up behind dropdown (should be invisible)
+- In Student Path: scroll still present if left while answering questions
+	- Hack Fix: Set Student SO "Contains Animated" to true 
+	-> Scroll always leaves when entering game (but usually gone by bottle click)
+
+Refactor:
+- ScavengerHunt: break into smaller classes with single responsibilities
+- Mentor: break into smaller classes with single responsibilities
+
+Future Development (post demo)
+- [Research] Store images in JSON? -> store images created by mentors
