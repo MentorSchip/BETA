@@ -13,6 +13,7 @@ public class NavigationCommand : MonoBehaviour
     public bool containsAnimatedObject;
     public Animator animatedObject;
     
+    public OrderedEvent[] OnFirstEntry;
     public UnityEvent OnEnterAny;       
     public UnityEvent OnEnterForward;   
     public UnityEvent OnEnterBack;      
@@ -20,9 +21,13 @@ public class NavigationCommand : MonoBehaviour
     public UnityEvent OnExitForward;
     public UnityEvent OnExitBack;
 
+    SequenceUtility sequence = new SequenceUtility();
+    bool hasEntered = false;
+
     // Enter state (either normally or via Back button)
     public void Enter(bool isForward)
     {
+        //Debug.Log("Entering " + gameObject.name);
         DisplaySelf(true, false);
         EnterSupercommand(isForward);
 
@@ -58,6 +63,12 @@ public class NavigationCommand : MonoBehaviour
     public void DisplaySelf(bool isActive, bool allowIgnore)
     {
         gameObject.SetActive(isActive);
+
+        if (!hasEntered)
+        {
+            sequence.Begin(OnFirstEntry);
+            hasEntered = true;
+        }
 
         foreach (var navItem in alsoActivate)
         {

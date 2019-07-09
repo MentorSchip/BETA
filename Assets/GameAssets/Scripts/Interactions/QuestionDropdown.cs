@@ -8,7 +8,8 @@ public class QuestionDropdown : MonoBehaviour
     [SerializeField] ScavengerHunt scavengerHunt;
     [SerializeField] InputField inputText;
     Dropdown dropdown;
-    QuestionSet currentQuestions;
+    //QuestionSet currentQuestions;
+    List<string> currentQuestions;
 
     string selectedQuestion;
     int selectedIndex = 0;
@@ -19,13 +20,15 @@ public class QuestionDropdown : MonoBehaviour
     }
 
     // Read values from external source
-    public void PopulateList(QuestionSet questions)
+    //public void PopulateList(QuestionSet questions)
+    public void PopulateList(List<string> questions)
     {
         inputText.text = "";
         dropdown.ClearOptions();
 
         currentQuestions = questions;
-        dropdown.AddOptions(questions.values);
+        dropdown.AddOptions(questions);
+        //dropdown.AddOptions(questions.values);
 
         // Refresh value of selectedQuestion so data saves correctly
         DropdownIndexChanged(selectedIndex);
@@ -34,7 +37,8 @@ public class QuestionDropdown : MonoBehaviour
     public void DropdownIndexChanged(int index)
     {
         selectedIndex = index;
-        selectedQuestion = currentQuestions.values[index];
+        selectedQuestion = currentQuestions[index];
+        //selectedQuestion = currentQuestions.values[index];
     }
 
     public void GatherData()
@@ -44,7 +48,8 @@ public class QuestionDropdown : MonoBehaviour
             return;
 
         if (selectedQuestion == null)
-            selectedQuestion = currentQuestions.values[0];
+            selectedQuestion = currentQuestions[0];
+            //selectedQuestion = currentQuestions.values[0];
             
         dataCollector.AddResponse(scavengerHunt.GetLevelId(), selectedQuestion, inputText.text);
         scavengerHunt.AdvanceLevel(true);

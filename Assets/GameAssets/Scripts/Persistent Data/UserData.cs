@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public enum UserRole
     Champ
 }
 
-// Packages all student data for persistent storage
+// Packages all user data for persistent storage
 public class UserData
 {
     // User data
@@ -39,7 +40,7 @@ public class UserData
         return responseData[level].ContainsQuestion(question);
     }
 
-    public void AddResponse(int levelId, string question, string answer)
+    public void AddResponse(string levelId, string question, string answer)
     {
         var currentLevel = GetLevelById(levelId);
 
@@ -52,7 +53,7 @@ public class UserData
         currentLevel.AddIfNew(question, answer);
     }
 
-    private ResponseSet GetLevelById(int levelId)
+    private ResponseSet GetLevelById(string levelId)
     {
         foreach (var set in responseData)
         {
@@ -70,8 +71,19 @@ public class UserData
 
 
     // Mentor data
-    public List<ScholarshipSet> scholarshipsCreated;
-    public ScholarshipSet scholarshipBeingCreated;
+    private List<ScholarshipSet> _scholarshipsCreated;
+    public List<ScholarshipSet> scholarshipsCreated 
+    { 
+        get
+        {
+            if (_scholarshipsCreated == null)
+                _scholarshipsCreated = new List<ScholarshipSet>();
+            
+            return _scholarshipsCreated;
+        }
+        set { _scholarshipsCreated = value; }
+    }
+    public ScholarshipSet currentScholarship;
 
     public float totalValuePlaced      // ERROR: adding for all users, not resetting(?)
     {
@@ -89,50 +101,55 @@ public class UserData
         }
     }
 
-    // [TBD] Research how to effectively save images to external storage
-    public void AddScholarshipImage(Image image)
-    {
-
-    }
-
     public void BeginCreatingScholarship()
     {
-        if (scholarshipsCreated == null)
-            scholarshipsCreated = new List<ScholarshipSet>();
-
-        scholarshipBeingCreated = new ScholarshipSet();
         //Debug.Log("New scholarship created!");
-
-        scholarshipsCreated.Add(scholarshipBeingCreated);
+        currentScholarship = new ScholarshipSet();
+        scholarshipsCreated.Add(currentScholarship);
     }
 
     public void CancelCreatingScholarship()
     {
         if (scholarshipsCreated.Count == 0)
             return;
-        if (scholarshipBeingCreated == null)
+        if (currentScholarship == null)
             Debug.LogError("Trying to remove a scholarship even though one is not being created");
         
-        scholarshipsCreated.Remove(scholarshipBeingCreated);
+        scholarshipsCreated.Remove(currentScholarship);
 
         // Current item is the last item in list
-        scholarshipBeingCreated = scholarshipsCreated[scholarshipsCreated.Count-1];
+        if (scholarshipsCreated.Count == 0)
+            currentScholarship = null;
+        else
+            currentScholarship = scholarshipsCreated[scholarshipsCreated.Count-1];
+    }
+
+    public void AddPicture(Sprite sprite)
+    {
+        currentScholarship.sprite = sprite;
     }
 
     public void AddScholarshipQuestions(List<string> questions)
     {
-        scholarshipBeingCreated.questions = questions;
+        currentScholarship.questions = questions;
     }
 
     public void AddScholarshipParameters(float value, string duration)
     {
-        scholarshipBeingCreated.value = value;
-        scholarshipBeingCreated.duration = duration;
+        currentScholarship.value = value;
+        currentScholarship.durationDescription = duration;
     }
 
     public void RemoveScholarshipParameters()
     {
-        scholarshipBeingCreated.value = 0;
-        scholarshipBeingCreated.duration = "";
+        currentScholarship.value = 0;
+        currentScholarship.durationDescription = "";
+    }
+
+    public void AddDemoLevel(ScavengerLevel level)
+    {
+        currentScholarship = new ScholarshipSet(level);
+        //Debug.Log("Adding level..." + currentScholarship.gpsLocation + ", " + level.gpsLocation);
+        scholarshipsCreated.Add(currentScholarship);
     }
 }

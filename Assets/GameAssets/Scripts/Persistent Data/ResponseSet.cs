@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 // Stores list of a student's selected questions and written responses for a single level
 // Responsible for adding new entries and checking for duplicates
 public class ResponseSet
 {
-    public ResponseSet(int id)
+    public ResponseSet(string id)
     {
         this.id = id;
     }
 
-    public int id;
+    public string id;
     public List<SingleResponse> values = new List<SingleResponse>();
 
     public void AddIfNew(string question, string answer)

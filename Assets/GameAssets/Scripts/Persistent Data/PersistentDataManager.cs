@@ -16,6 +16,7 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
     public Action<string, float> SaveDataEvent;
 
     public UserData currentUser = new UserData();
+    public string userLocation;     // * Check if this is really needed
 
     #if UNITY_EDITOR
     [MenuItem("Debug/Wipe All Progress")]

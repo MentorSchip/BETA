@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/* using System.Collections;
 using UnityEngine;
 
 // DEPRECATE
@@ -19,4 +19,4 @@ public class ImageTriggerAsset : CustomObject
     {
         hasActivated = true;
     }
-}
+}*/

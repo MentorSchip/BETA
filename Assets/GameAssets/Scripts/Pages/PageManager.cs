@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class PageManager : MonoBehaviour
 {
-    public List<NavigationCommand> commands = new List<NavigationCommand>();  // Make private when no longer debugging
-    //List<Command> commands = new List<Command>();
+     // Make private when no longer debugging
+    public List<NavigationCommand> commands = new List<NavigationCommand>(); 
 
     public void Navigate(NavigationCommand page)
     {
@@ -15,7 +15,6 @@ public class PageManager : MonoBehaviour
         }
 
         commands.Add(page);
-        //commands.Add(new Command(page, PersistentDataManager.instance.currentUser));
         page.Enter(true);
 
         if (page.isEmptyState)
@@ -39,43 +38,22 @@ public class PageManager : MonoBehaviour
         if (toPage.containsAnimatedObject && !fromPage.containsAnimatedObject)
         {
             //Debug.Log("Transitioning from close to open, opening scroll");
-            TriggerAnimation(toPage.animatedObject, true);
+            toPage.animatedObject.SetBool("IsOpen", true);
         }
         else if (!toPage.containsAnimatedObject && fromPage.containsAnimatedObject)
         {
             //Debug.Log("Transitioning from open to close, closing scroll");
-            TriggerAnimation(toPage.animatedObject, false);
+            toPage.animatedObject.SetBool("IsOpen", false);
         }
         else if (toPage.animatedObject != fromPage.animatedObject)
         {
-            TriggerAnimation(toPage.animatedObject, toPage.containsAnimatedObject);
+            toPage.animatedObject.SetBool("IsOpen", toPage.containsAnimatedObject);
         }
-    }
-
-    private void TriggerAnimation(Animator animated, bool value)
-    {
-        //Debug.Log("Triggering animation: " + animated.gameObject.name + " " + value);
-        tempAnim = animated;
-        tempValue = value;
-        Invoke("DelayAnimation", .02f);   
-    }
-
-    // * Hack fix and sometimes causes short visual glitch, try to remove delay when underlying bug identified
-    Animator tempAnim;
-    bool tempValue;
-    private void DelayAnimation()
-    {
-        if (tempAnim == null)
-        {
-            Debug.LogWarning("tempAnim unassigned, check if there is an animator attached to " + commands[commands.Count-1].gameObject.name);
-            return;
-        }
-
-        tempAnim.SetBool("IsOpen", tempValue);
     }
 
     public void Back()
     {
+        //Debug.Log("Back method reached...");
         if (commands.Count <= 1)
             return;
 
@@ -102,6 +80,10 @@ public class PageManager : MonoBehaviour
 
     public void DisplayCurrent(bool isActive)
     {
+        //Debug.Log("DisplayCurrent method called: " + commands.Count);
+        if (commands.Count <= 0)
+            return;
+
         //Debug.Log(commands[commands.Count-1].name + " " + isActive);
         commands[commands.Count-1].DisplaySelf(isActive, true);
     }

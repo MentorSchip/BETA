@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 // Interface between scene and data to be sent to persistent storage
@@ -13,7 +14,7 @@ public class DataCollector : MonoBehaviour
         this.studentData = user;
     }
 
-    public void AddResponse(int questionId, string question, string answer)
+    public void AddResponse(string questionId, string question, string answer)
     {
         studentData.AddResponse(questionId, question, answer);
         PersistentDataManager.instance.Save(studentData);

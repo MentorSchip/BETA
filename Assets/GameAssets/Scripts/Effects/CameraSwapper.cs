@@ -4,15 +4,11 @@ public class CameraSwapper : MonoBehaviour
 {
     Canvas canvas;
 
-    [SerializeField] Camera liveFeedCamera;
-    [SerializeField] Camera gameCamera;
-
-    public void SwapCamera(bool isGameView)
+    public void SwapCamera(Camera activeCamera)
     {
         if (canvas == null)
             canvas = GetComponent<Canvas>();
 
-        //Debug.Log("Swapping camera. To game view = " + isGameView);
-        canvas.worldCamera = isGameView ? gameCamera : liveFeedCamera;
+        canvas.worldCamera = activeCamera;
     }
 }

@@ -5,7 +5,7 @@ public class ImageTrigger : MonoBehaviour
 {
     [SerializeField] GameObject gameContainer;
     [SerializeField] GameObject trackable;
-    [SerializeField] ScavengerLevel level;
+    [SerializeField] ScholarshipSet level;
     IGame game;
 
     [SerializeField] float waitTime = 1f;

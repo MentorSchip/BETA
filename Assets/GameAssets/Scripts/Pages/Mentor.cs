@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Mapbox.Unity.Utilities;
+using Mapbox.Examples;
 
 // [REFACTOR] break related functionality into seperate classes
 public class Mentor : MonoBehaviour
@@ -41,6 +43,7 @@ public class Mentor : MonoBehaviour
     UserData userData { get { return PersistentDataManager.instance.currentUser; } }
     public List<string> questionList = new List<string>();
 
+
     public void Initialize()
     {
         inputField = newQuestionInput.gameObject.GetComponent<CustomInputField>();
@@ -49,6 +52,11 @@ public class Mentor : MonoBehaviour
     public void BeginCreatingScholarship()
     {
         userData.BeginCreatingScholarship();
+    }
+
+    public void PictureTaken(Sprite sprite)
+    {
+        userData.AddPicture(sprite);
     }
 
     public void QuestionDropdownIndexChanged(int index)
@@ -221,7 +229,7 @@ public class Mentor : MonoBehaviour
 
     public void RemoveScholarshipQuestions()
     {
-        var questionsToRemove = userData.scholarshipBeingCreated.questions;
+        var questionsToRemove = userData.currentScholarship.questions;
 
         foreach (var question in questionsToRemove)
         {

@@ -16,12 +16,13 @@ public class MentorCamera : MonoBehaviour
     // Cached variables
     Texture2D texture;
     Rect rectangle;
-    Sprite sprite;
     float captureHeight;
     float heightShift;
     int verticalLocation;
+    Sprite sprite;
 
     public UnityEvent OnPictureTaken;
+    public SpriteEvent BroadcastSprite;
 
     public void SnapshotButtonPressed()
     {
@@ -53,5 +54,6 @@ public class MentorCamera : MonoBehaviour
 
         yield return new WaitForEndOfFrame();
         OnPictureTaken.Invoke();
+        BroadcastSprite.Invoke(sprite);
     }
 }

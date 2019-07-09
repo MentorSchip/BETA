@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fcb2cc1a031e384b85de33d4abccfc9, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  questionSet: {fileID: 11400000, guid: 806beb0df1ecb0f4b8460c73fb346f27, type: 2}
   target: {fileID: 0}
-  hintImage: {fileID: 21300000, guid: d5d7bc64e766d0c4e9c8d90402ace0ab, type: 3}
-  hintText: Find the image
+  sprite: {fileID: 21300000, guid: 1b4169e3a193e446e90ada671c1925d4, type: 3}
+  questions:
+  - q3
+  gpsLocation: 45.559506, -122.661196
+  duration: 30000
+  value: 5

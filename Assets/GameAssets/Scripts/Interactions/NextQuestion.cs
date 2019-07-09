@@ -17,7 +17,5 @@ public class NextQuestion : MonoBehaviour
             return;
          
         dataCollector.AddResponse(game.GetLevelId(), questionText.text, inputText.text);
-        
-        //game.
     }
 }

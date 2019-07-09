@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Wikitude;
@@ -12,25 +13,28 @@ public class ScavengerHunt : MonoBehaviour, IGame
     int questionIndex;
 
     CustomMath math = new CustomMath();
-    public ScavengerLevel[] levels;
 
-    [HideInInspector] public ScavengerLevel currentLevel;
+    [SerializeField] GameObject[] imageTargets;
+    [SerializeField] LocationData levelData;
+    ScavengerLevel[] levels 
+    { 
+        get { return levelData.prebuiltLevels; } 
+        set { levelData.prebuiltLevels = value; } 
+    }
     int levelIndex;
 
     DataCollector scoreboard;
     UserData userData { get { return PersistentDataManager.instance.currentUser; } }
+    ScholarshipSet currentLevel { get { return userData.currentScholarship; } }
     int saveCompleteOffset = 0;
 
-    public UnityEvent OnFindApplication;
-    public UnityEvent OnResumeSearch;
-    public UnityEvent OnCompleteHunt;
+    [SerializeField] UnityEvent OnFindApplication;
+    [SerializeField] UnityEvent OnResumeSearch;
+    [SerializeField] UnityEvent OnCompleteHunt;
 
-    //public void Initialize(UserData user)
     public void Initialize()
     {
-        //this.userData = user;
         saveCompleteOffset = userData.Score;
-        //Debug.Log("Setting user in Scavenger hunt: " + user.Name + ", " + saveCompleteOffset + ", score = " + userData.Score);
 
         levels = math.Shuffle(levels);
         levelIndex = 0;
@@ -38,12 +42,15 @@ public class ScavengerHunt : MonoBehaviour, IGame
 
     public void ActivateCurrentLevel()
     {
-        foreach(var level in levels)
-            level.target.SetActive(false);
+        for (int i = 0; i < levels.Length; i++)
+        {
+            // [TBD] set target in ScholarshipSet...wait until AR system stabilized
+            levels[i].target = imageTargets[i];
+            imageTargets[i].SetActive(false);
+        }
 
-        currentLevel = levels[levelIndex];
-        currentLevel.target.SetActive(true);
-        hintImage.sprite = currentLevel.hintImage;
+        imageTargets[levelIndex].SetActive(true);
+        hintImage.sprite = currentLevel.sprite;
         hintText.text = currentLevel.hintText;
 
         if (scoreboard == null)
@@ -60,7 +67,7 @@ public class ScavengerHunt : MonoBehaviour, IGame
         }
     }
 
-    private bool IsLevelComplete(ScavengerLevel level)
+    private bool IsLevelComplete(ScholarshipSet level)
     {
         if (userData == null)
         {
@@ -69,7 +76,7 @@ public class ScavengerHunt : MonoBehaviour, IGame
         }
 
         for (int i = 0; i < userData.responseData.Count; i++)
-            if (userData.responseData[i].id == level.questionSet.id)
+            if (userData.responseData[i].id == level.id)
                 return true;
 
         return false;
@@ -88,15 +95,16 @@ public class ScavengerHunt : MonoBehaviour, IGame
         SetQuestion(0);
     }
 
-    public int GetLevelId()
+    public string GetLevelId()
     {
-        return currentLevel.questionSet.id;
+        return currentLevel.id;
     }
 
     private void SetQuestion(int index)
     {
         this.questionIndex = index;
-        string currentQuestion = currentLevel.questionSet.values[questionIndex];
+        string currentQuestion = currentLevel.questions[questionIndex];
+        //string currentQuestion = currentLevel.questionSet.values[questionIndex];
 
         if (userData.IsQuestionAnswered(levelIndex, currentQuestion))
             NextQuestion(true);
@@ -114,11 +122,12 @@ public class ScavengerHunt : MonoBehaviour, IGame
 
         //Debug.Log("skipped last = " + skippedLast);
         if (!skippedLast)
-            userData.AddResponse(currentLevel.questionSet.id, question.text, input.text);
+            userData.AddResponse(currentLevel.id, question.text, input.text);
    
         questionIndex++;
 
-        if (questionIndex >= currentLevel.questionSet.values.Count)
+        //if (questionIndex >= currentLevel.questionSet.values.Count)
+        if (questionIndex >= currentLevel.questions.Count)
         {
             AdvanceLevel(true);
             userData.Score++;

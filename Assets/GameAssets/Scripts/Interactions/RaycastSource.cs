@@ -10,7 +10,7 @@ public class RaycastSource : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //Debug.Log("Mouse click detected");
+            //Debug.Log("Mouse click detected, casting ray from " + Camera.main);
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.red, 1f);
