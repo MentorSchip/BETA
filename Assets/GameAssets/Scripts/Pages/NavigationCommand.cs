@@ -27,7 +27,7 @@ public class NavigationCommand : MonoBehaviour
     // Enter state (either normally or via Back button)
     public void Enter(bool isForward)
     {
-        //Debug.Log("Entering " + gameObject.name);
+        //Debug.Log("Entering " + gameObject.name + " " + isForward);
         DisplaySelf(true, false);
         EnterSupercommand(isForward);
 

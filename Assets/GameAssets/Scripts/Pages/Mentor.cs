@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using Mapbox.Unity.Utilities;
 using Mapbox.Examples;
 
-// [REFACTOR] break related functionality into seperate classes
+// [REFACTOR] break related functionality into delegate classes
 public class Mentor : MonoBehaviour
 {
     [SerializeField] Dropdown questionDropdown;

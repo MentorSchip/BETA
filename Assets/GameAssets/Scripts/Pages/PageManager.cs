@@ -68,8 +68,10 @@ public class PageManager : MonoBehaviour
         // Leave the current state (parameter = where to go next)
         currentCommand.Exit(priorCommand, false);
 
+        //Debug.Log(priorCommand.gameObject.name + " " + priorCommand.isEmptyState);
         if (priorCommand.isEmptyState)
         {
+            //Debug.Log("Moving back through empty state...");
             Back();
             return;
         }

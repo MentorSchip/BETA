@@ -136,12 +136,14 @@ public class UserData
 
     public void AddScholarshipParameters(float value, string duration)
     {
+        Debug.Log("Setting value to " + value + " and duration to " + duration);
         currentScholarship.value = value;
         currentScholarship.durationDescription = duration;
     }
 
     public void RemoveScholarshipParameters()
     {
+        Debug.Log("Removing value and duration...");
         currentScholarship.value = 0;
         currentScholarship.durationDescription = "";
     }
