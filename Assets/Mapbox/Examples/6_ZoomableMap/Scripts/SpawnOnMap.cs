@@ -151,7 +151,9 @@ public class SpawnOnMap : MonoBehaviour
 		scholarship.timeRemaining = duration;
 
 		availableScholarships.Add(scholarship);
-		spawnedItems.Add(Instantiate(_markerPrefab).GetComponent<IMapSpawnable>());
+		var newMarkerObj = Instantiate(_markerPrefab);
+		spawnedItems.Add(newMarkerObj.GetComponent<IMapSpawnable>());
+		newMarkerObj.transform.parent = mapObj.transform;
 
 		mapDisplay.ShowUI(scholarship);
 	}

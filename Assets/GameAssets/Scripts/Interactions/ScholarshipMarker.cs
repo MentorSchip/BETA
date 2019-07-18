@@ -46,7 +46,7 @@ public class ScholarshipMarker : MonoBehaviour, IMapSpawnable
         }
 
         transform.localPosition = mapbox.GeoToWorldPosition(location, false);
-        Debug.Log("Player GPS = " + playerLocationGps);
+        //Debug.Log("Player GPS = " + playerLocationGps);
 
         if (transform.localPosition == Vector3.zero)
         {

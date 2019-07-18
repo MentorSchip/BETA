@@ -4,8 +4,9 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using Wikitude;
 
-public class ScavengerHunt : MonoBehaviour, IGame
+public class ScavengerHunt : MonoBehaviour
 {
+    [SerializeField] ImageTrackable trackable;
     [SerializeField] Text hintText;
     [SerializeField] Image hintImage;
     [SerializeField] Text question;
@@ -14,18 +15,17 @@ public class ScavengerHunt : MonoBehaviour, IGame
 
     CustomMath math = new CustomMath();
 
-    [SerializeField] GameObject[] imageTargets;
     [SerializeField] LocationData levelData;
     ScavengerLevel[] levels 
     { 
         get { return levelData.prebuiltLevels; } 
         set { levelData.prebuiltLevels = value; } 
     }
+    ScavengerLevel currentLevel;
     int levelIndex;
 
     DataCollector scoreboard;
     UserData userData { get { return PersistentDataManager.instance.currentUser; } }
-    ScholarshipSet currentLevel { get { return userData.currentScholarship; } }
     int saveCompleteOffset = 0;
 
     [SerializeField] UnityEvent OnFindApplication;
@@ -38,18 +38,16 @@ public class ScavengerHunt : MonoBehaviour, IGame
 
         levels = math.Shuffle(levels);
         levelIndex = 0;
+
+        ActivateCurrentLevel();
     }
 
     public void ActivateCurrentLevel()
-    {
-        for (int i = 0; i < levels.Length; i++)
-        {
-            // [TBD] set target in ScholarshipSet...wait until AR system stabilized
-            levels[i].target = imageTargets[i];
-            imageTargets[i].SetActive(false);
-        }
+    {    
+        currentLevel = levels[levelIndex];
+        //Debug.Log("new level: " + currentLevel.imageId);
+        trackable.TargetPattern = currentLevel.imageId;
 
-        imageTargets[levelIndex].SetActive(true);
         hintImage.sprite = currentLevel.sprite;
         hintText.text = currentLevel.hintText;
 
@@ -61,13 +59,14 @@ public class ScavengerHunt : MonoBehaviour, IGame
 
         if(IsLevelComplete(currentLevel))
         {
-            //Debug.Log("Level complete, auto-advancing..."); 
+            Debug.Log("Level complete, auto-advancing..."); 
             saveCompleteOffset--;
             AdvanceLevel(false);  
         }
     }
 
-    private bool IsLevelComplete(ScholarshipSet level)
+    // Checks current level against persistent data to determine if level has already been completed
+    private bool IsLevelComplete(ScavengerLevel level)
     {
         if (userData == null)
         {
@@ -75,36 +74,37 @@ public class ScavengerHunt : MonoBehaviour, IGame
             return false;
         }
 
+        Debug.Log("Searching for prior completion of: " + level.imageId + " in " + userData.responseData.Count + " saved entries.");
         for (int i = 0; i < userData.responseData.Count; i++)
-            if (userData.responseData[i].id == level.id)
+        {
+            Debug.Log("Checking saved response: " + userData.responseData[i].id);
+            if (userData.responseData[i].id == level.imageId)
                 return true;
+        }
 
         return false;
     }
 
-    public void OnClickTrackable(GameObject found)
+    public void OnClickTrackable()
     {
-        if (found != currentLevel.target)
-            return;
-
-        //Debug.Log("OnClickTrackable, found " + found.name + ", current level target = " + currentLevel.target.name);
-        // Hide AR image
-        currentLevel.target.SetActive(false);
-        
+        //Debug.Log("clicked: " + currentLevel.imageId);
+        trackable.TargetPattern = "";  
         OnFindApplication.Invoke();
-        SetQuestion(0);
+
+        // [Redundant?] Reinitialize question dropdown
+        SetQuestion(0); 
     }
 
     public string GetLevelId()
     {
-        return currentLevel.id;
+        return currentLevel.imageId;
     }
 
+    // Sets question text based on how many questions have been answered so far
     private void SetQuestion(int index)
     {
         this.questionIndex = index;
         string currentQuestion = currentLevel.questions[questionIndex];
-        //string currentQuestion = currentLevel.questionSet.values[questionIndex];
 
         if (userData.IsQuestionAnswered(levelIndex, currentQuestion))
             NextQuestion(true);
@@ -122,11 +122,11 @@ public class ScavengerHunt : MonoBehaviour, IGame
 
         //Debug.Log("skipped last = " + skippedLast);
         if (!skippedLast)
-            userData.AddResponse(currentLevel.id, question.text, input.text);
+            userData.AddResponse(currentLevel.imageId, question.text, input.text);
    
         questionIndex++;
 
-        //if (questionIndex >= currentLevel.questionSet.values.Count)
+        //Debug.Log("NextQuestion...qIndex = " + questionIndex + ", out of: " + currentLevel.questions.Count);
         if (questionIndex >= currentLevel.questions.Count)
         {
             AdvanceLevel(true);
@@ -139,12 +139,9 @@ public class ScavengerHunt : MonoBehaviour, IGame
         PersistentDataManager.instance.Save(userData);
     }
 
+    // Advance the level or end the series
     public void AdvanceLevel(bool playAnimation)
     {
-        // Deactivate the completed level's tracker
-        currentLevel.target.SetActive(false);
-
-        // Advance the level or end the series
         levelIndex++;
 
         if (levelIndex >= levels.Length)

@@ -20,12 +20,6 @@ public class MapScholarshipDisplay : MonoBehaviour
         value.text = "$" + scholarshipInfo.value.ToString();        
     }
 
-    /* public void SetImage(Sprite sprite)
-    {
-        Debug.Log("Setting image...");
-        image.sprite = sprite;
-    }*/
-
     public void Tick()
     {
         if (currentScholarship == null)

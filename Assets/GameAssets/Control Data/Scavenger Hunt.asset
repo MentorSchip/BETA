@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scavenger Hunt
   m_EditorClassIdentifier: 
   prebuiltLevels:
-  - {fileID: 11400000, guid: 87f0d0039c2cad341abc64a40e1a2a9a, type: 2}
-  - {fileID: 11400000, guid: f7823594d972f964080afef7e80ceeac, type: 2}
-  - {fileID: 11400000, guid: 44a75e408d7206b44a800a1db3c90e2b, type: 2}
-  - {fileID: 11400000, guid: 2425424b7e54eec449b234bcb4aa929d, type: 2}
+  - {fileID: 11400000, guid: 8fa434db946887c4abc3c6c10de87ab5, type: 2}
+  - {fileID: 11400000, guid: dedfe4fd561594946a61bd2105ddef0e, type: 2}
+  - {fileID: 11400000, guid: 296bdd8597cc1cd458108a994c544a2a, type: 2}
+  - {fileID: 11400000, guid: cb6e17b15e825da42bc8986a90049552, type: 2}

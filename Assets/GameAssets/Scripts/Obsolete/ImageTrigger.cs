@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿/* using UnityEngine;
 using UnityEngine.Events;
 
+// DEPRECATE: OnClick covered by RaycastTrigger, all other functionality obsolete
 public class ImageTrigger : MonoBehaviour
 {
-    [SerializeField] GameObject gameContainer;
+    //[SerializeField] GameObject gameContainer;
     [SerializeField] GameObject trackable;
-    [SerializeField] ScholarshipSet level;
-    IGame game;
+    ScholarshipSet level;
+    //IGame game;
 
+    // [Obsolete]
     [SerializeField] float waitTime = 1f;
     public UnityEvent OnActivate;
     public UnityEvent OnReactivate;
@@ -16,15 +18,17 @@ public class ImageTrigger : MonoBehaviour
     private void Awake()
     {
         game = gameContainer.GetComponent<IGame>();
-        level.target = gameObject;
+        level.target = gameObject;  // Pass reference to self to level -> ERROR: how does an image know its level?  No longer a SO...
     }
 
     public void OnClick()
     {
+        //Debug.Log("Image trigger clicked!");
         if (trackable.activeSelf)
-            game.OnClickTrackable(gameObject);
+            game.OnClickTrackable();
     }
 
+    // [Obsolete]
     public void ActivateNext()
     {
         //Debug.Log(gameObject.name + " activating next image...");
@@ -46,4 +50,4 @@ public class ImageTrigger : MonoBehaviour
             hasActivated = true;
         }
     }
-}
+}*/

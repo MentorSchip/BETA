@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// FUTURE USE...or deprecate
 public abstract class InteractiveObject : MonoBehaviour {
 
     // Use this for initialization

@@ -22,7 +22,7 @@ public class AutoSceneSetup : Singleton<AutoSceneSetup>
     }
 }
 
-public enum SetupSettingId { Default, Map }
+public enum SetupSettingId { Default, Map, AR_Test }
 
 [Serializable]
 public struct SetupSettings
@@ -39,15 +39,19 @@ public static class EditorSceneSetup
     [MenuItem("Debug/Scene Setup/Default")]
     static void SetDefaultActive()
     {
-        //Debug.Log("Setting default scene objects active...");
         AutoSceneSetup.instance.SetScene(SetupSettingId.Default);
     }
 
     [MenuItem("Debug/Scene Setup/Map")]
-    static void SetTestActive()
+    static void SetMapTestActive()
     {
-        //Debug.Log("Setting map scene objects active...");
         AutoSceneSetup.instance.SetScene(SetupSettingId.Map);
+    }
+
+    [MenuItem("Debug/Scene Setup/AR Test")]
+    static void SetARTestActive()
+    {
+        AutoSceneSetup.instance.SetScene(SetupSettingId.AR_Test);
     }
 
     #endif

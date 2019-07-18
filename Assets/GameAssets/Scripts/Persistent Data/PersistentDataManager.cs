@@ -16,7 +16,7 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
     public Action<string, float> SaveDataEvent;
 
     public UserData currentUser = new UserData();
-    public string userLocation;     // * Check if this is really needed
+    public string userLocation;
 
     #if UNITY_EDITOR
     [MenuItem("Debug/Wipe All Progress")]
@@ -80,6 +80,6 @@ public class PersistentDataManager : Singleton<PersistentDataManager>
         string dataAsJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
 
         try { File.WriteAllText(filePath, dataAsJson); }
-        catch { Debug.LogError("Failed to save file"); }    // [TBD] Automatic file repair on fail
+        catch { Debug.LogError("Failed to save file"); }    // [TBD] Automatic file repair on fail goes here
     }
 }

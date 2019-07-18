@@ -1,6 +1,7 @@
-﻿using System;
+﻿/* using System;
 using UnityEngine;
 
+// DEPRECATE: combined into RaycastSource
 public class PlayerInput : MonoBehaviour
 {
     private void Update()
@@ -29,4 +30,4 @@ public class PlayerInput : MonoBehaviour
             if (hit.collider.gameObject.tag == "Interactable")
                 hit.collider.gameObject.GetComponent<ImageTrigger>().OnClick();
     }
-}
+}*/

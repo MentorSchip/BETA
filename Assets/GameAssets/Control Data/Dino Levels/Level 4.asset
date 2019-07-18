@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fcb2cc1a031e384b85de33d4abccfc9, type: 3}
+  m_Name: Level 4
+  m_EditorClassIdentifier: 
+  imageId: diplodocus
+  sprite: {fileID: 21300000, guid: f41701ed2709f44589c3257e491dc022, type: 3}
+  hintText: Find the Image
+  questions:
+  - What seems to make me happy?
+  - What are my sources of stability?
+  gpsLocation: 45.4953,-122.6205
+  duration: 30000
+  value: 6
